@@ -37,9 +37,7 @@ const CryptoDetails = () => {
   const objectHistory = coinHistory?.data?.history;
   const timeStampArr = [];
   const priceArr = [];
-  console.log(timePeriod);
   for (const key in objectHistory) {
-    console.log(timePeriod === "3h" || "24h" || "7d");
     const dateFormat =
       timePeriod === "3h" || timePeriod === "24h" || timePeriod === "7d"
         ? new Date(objectHistory?.[key]?.timestamp * 1000).toLocaleString(

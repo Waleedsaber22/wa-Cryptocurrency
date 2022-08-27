@@ -1,34 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Typography, Row, Col, Card, Input } from "antd";
+import { Row, Col, Card, Input } from "antd";
 import { Link } from "react-router-dom";
 import { useGetCryptosQuery } from "../services/cryptoApi";
 import { useMediaQuery } from "@mui/material";
 import millify from "millify";
 import Loader from "./Loader";
-
-// const filterData = (data, search) => {
-//   let k = 0;
-//   let found = true;
-//   if (typeof data === "string" && typeof search === "string") {
-//     data = data.toLowerCase();
-//     search = search.toLowerCase().trim();
-//     if (data.length >= search.length) {
-//       for (let i = 0; i < search.length; i++) {
-//         for (let j = k; j < data.length; j++) {
-//           if (data[j] !== search[i]) found = false;
-//           else {
-//             found = true;
-//             k = j + 1;
-//             if (i === 0 && search.length > data.length - j) return false;
-//             break;
-//           }
-//         }
-//         if (!found) return false;
-//       }
-//     } else return false;
-//   } else return false;
-//   return found;
-// };
+import { nanoid } from "@reduxjs/toolkit";
 const filterData = (data, search) => {
   if (search === "") return { check: true, indexHighlightChar: [] };
   if (typeof data === "string" && typeof search === "string") {
@@ -49,14 +26,8 @@ const filterData = (data, search) => {
   } else return { check: false, indexHighlightChar: [] };
   return { check: false, indexHighlightChar: [] };
 };
-const { Title } = Typography;
 const Cryptocurrencies = ({ simplified }) => {
-  const {
-    data: cryptoList,
-    isFetching,
-    isSuccess,
-    error,
-  } = useGetCryptosQuery({
+  const { data: cryptoList, isFetching } = useGetCryptosQuery({
     path: "coins",
     limit: simplified ? 10 : 100,
   });
@@ -92,7 +63,6 @@ const Cryptocurrencies = ({ simplified }) => {
           />
         </div>
       )}
-      {/* {coinslist?.data?.length > 0 ? ( */}
       <Row gutter={[24, 24]} style={{ marginInline: "0px" }}>
         {coinslist?.data?.map((coin, i) => (
           <Col xs={24} sm={12} lg={8} key={coin.uuid}>
@@ -103,7 +73,10 @@ const Cryptocurrencies = ({ simplified }) => {
                     index++;
                     if (j === arr.length - 1) index = 0;
                     return (
-                      <span style={{ backgroundColor: color[index % 3] }}>
+                      <span
+                        style={{ backgroundColor: color[index % 3] }}
+                        key={nanoid()}
+                      >
                         {char}
                       </span>
                     );

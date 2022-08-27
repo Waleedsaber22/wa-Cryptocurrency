@@ -32,12 +32,10 @@ const News = ({ simplified }) => {
           }}
           placeholder="Select a Crypto"
           onChange={(value) => {
-            console.log(value);
             setNewsCategory(value.toLowerCase());
           }}
           optionFilterProp="children"
           filterOption={(input, option) => {
-            console.log(input, option);
             return option.children.toLowerCase().indexOf(input.toLowerCase());
           }}
         >

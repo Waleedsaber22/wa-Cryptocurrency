@@ -31,17 +31,6 @@ const Navbar = () => {
       );
     });
   }, [isMobile]);
-  console.log(showMenu);
-  // useEffect(() => {
-  //   const resizeWindowHandler = () => {
-  //     setScreenWidth(window.innerWidth);
-  //   };
-  //   window.addEventListener("resize", resizeWindowHandler);
-  // }, []);
-  // useEffect(() => {
-  //   if (screenWidth <= 778) setShowMenu(false);
-  //   else setShowMenu(true);
-  // }, [screenWidth]);
   return (
     <div className="navbar--container">
       <div className="navbar--logo">
@@ -51,8 +40,8 @@ const Navbar = () => {
           style={{ marginTop: "15px" }}
           className="navbar--logo--view"
         ></Avatar>
-        <Title level={isMobile ? 3 : 2} className="navbar--logo--title">
-          <Link to="/">Crytoverse</Link>
+        <Title level={3} className="navbar--logo--title">
+          <Link to="/">Cryptoverse</Link>
         </Title>
       </div>
       {isMobile && (

@@ -4,7 +4,6 @@ import { useGetCryptosQuery } from "../services/cryptoApi";
 import Loader from "./Loader";
 import millify from "millify";
 import { nanoid } from "@reduxjs/toolkit";
-import axios from "axios";
 import { useMediaQuery } from "@mui/material";
 const Exchanges = () => {
   const { data, isFetching } = useGetCryptosQuery({
@@ -12,31 +11,31 @@ const Exchanges = () => {
     limit: 50,
   });
   const isMobile = useMediaQuery("(max-width:600px)");
-  const fetchCoinDetails = async (coinid, divElement) => {
-    const URL = `https://coinranking1.p.rapidapi.com/coin/${
-      coinid || "Qwsogvtv82FCd"
-    }`;
-    try {
-      divElement.innerHTML = "loading...";
-      if (window.getComputedStyle(divElement.parentElement).height !== "0px") {
-        divElement.parentElement.style.height = "0px";
-        divElement.parentElement.style.padding = "0px";
-      } else {
-        divElement.parentElement.style.height = `${divElement.offsetHeight}px`;
-        divElement.parentElement.style.padding = "10px";
-      }
-      const res = await axios.request(URL, {
-        headers: {
-          "X-RapidAPI-Key":
-            "87e344fd17mshdd40da9033fd90ep1e2367jsn6c240e713694",
-          "X-RapidAPI-Host": "coinranking1.p.rapidapi.com",
-        },
-      });
-      return { data: res.data, coinid };
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const fetchCoinDetails = async (coinid, divElement) => {
+  //   const URL = `https://coinranking1.p.rapidapi.com/coin/${
+  //     coinid || "Qwsogvtv82FCd"
+  //   }`;
+  //   try {
+  //     divElement.innerHTML = "loading...";
+  //     if (window.getComputedStyle(divElement.parentElement).height !== "0px") {
+  //       divElement.parentElement.style.height = "0px";
+  //       divElement.parentElement.style.padding = "0px";
+  //     } else {
+  //       divElement.parentElement.style.height = `${divElement.offsetHeight}px`;
+  //       divElement.parentElement.style.padding = "10px";
+  //     }
+  //     const res = await axios.request(URL, {
+  //       headers: {
+  //         "X-RapidAPI-Key":
+  //           "87e344fd17mshdd40da9033fd90ep1e2367jsn6c240e713694",
+  //         "X-RapidAPI-Host": "coinranking1.p.rapidapi.com",
+  //       },
+  //     });
+  //     return { data: res.data, coinid };
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   /* ###################### after rendering page ########################## */
   if (isFetching) return <Loader />;
   // const fetchData = async (coinid, divElement, coinId) => {
